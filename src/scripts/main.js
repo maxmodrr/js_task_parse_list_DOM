@@ -14,12 +14,10 @@ const sortedArray = [];
 function sortList(list) {
   for (let i = 0; i < list.length; i++) {
     const salary = salaries[i];
-    const stringSalary = salary
-      .toLocaleString('en-us')
-      .padStart(salary.toLocaleString('en-us').length + 1, '$');
 
     const person = list.filter(
-      (elem) => elem.getAttribute('data-salary') === stringSalary,
+      (elem) =>
+        +elem.getAttribute('data-salary').replace(/[$,]+/g, '') === salary,
     );
 
     person.forEach((elem) => {
@@ -32,7 +30,7 @@ function sortList(list) {
 
 function getEmployees(list) {
   for (let i = 0; i < list.length; i++) {
-    list[i].textContent = sortedArray[i];
+    list[i].textContent = sortedArray[i] || '';
   }
 }
 
